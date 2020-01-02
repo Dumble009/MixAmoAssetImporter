@@ -28,7 +28,6 @@ public class MixAmoAssetImporter : AssetPostprocessor
 				modelImporter.materialLocation = ModelImporterMaterialLocation.External;
 			}
 		}
-
 		AssetDatabase.ImportAsset(modelImporter.assetPath);
 	}
 
@@ -61,46 +60,16 @@ public class MixAmoAssetImporter : AssetPostprocessor
 				}
 
 				modelImporter.clipAnimations = animations;
+				
+				Avatar avatar = importSetting.avatar;
+
+				if (avatar != null)
+				{
+					modelImporter.sourceAvatar = avatar;
+				}
 			}
 
 			modelImporter.animationType = ModelImporterAnimationType.Human;
-			Avatar avatar = importSetting.avatar;
-
-			if (avatar != null)
-			{
-				modelImporter.sourceAvatar = avatar;
-			}
-
-			/*var clips = AssetDatabase
-							.LoadAllAssetRepresentationsAtPath(modelImporter.assetPath)
-							.OfType<AnimationClip>()
-							.ToArray<AnimationClip>();
-
-			foreach (var oldClip in clips)
-			{
-				var newClip = new AnimationClip();
-				AnimationUtility.SetAnimationEvents(newClip, AnimationUtility.GetAnimationEvents(oldClip));
-				AnimationUtility.SetAnimationClipSettings(newClip, AnimationUtility.GetAnimationClipSettings(oldClip));
-
-				
-				foreach (var curveBinding in AnimationUtility.GetCurveBindings(oldClip))
-				{
-					AnimationCurve curve = AnimationUtility.GetEditorCurve(oldClip, curveBinding);
-					newClip.SetCurve(curveBinding.path, curveBinding.type, curveBinding.propertyName, curve);
-				}
-
-				foreach (var curveBinding in AnimationUtility.GetObjectReferenceCurveBindings(oldClip))
-				{
-					AnimationCurve curve = AnimationUtility.GetEditorCurve(oldClip, curveBinding);
-					newClip.SetCurve(curveBinding.path, curveBinding.type, curveBinding.propertyName, curve);
-				}
-
-				var path = System.IO.Path.GetDirectoryName(modelImporter.assetPath) + "/" + oldClip.name + ".anim";
-				path = path.Replace("\\", "/");
-				AssetDatabase.CreateAsset(newClip, path);
-			}*/
-			//AssetDatabase.Refresh();
-			
 		}
 	}
 
