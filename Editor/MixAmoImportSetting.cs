@@ -14,6 +14,7 @@ public class MixAmoImportSetting : ScriptableObject
 			return Application.dataPath + "/" + mixAmoDirectory;
 		}
 	}
+	public bool isAnimationMakeLoop;
 }
 
 

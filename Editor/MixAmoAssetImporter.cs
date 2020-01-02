@@ -52,11 +52,21 @@ public class MixAmoAssetImporter : AssetPostprocessor
 					for (int i = 0; i < animationsCount; i++)
 					{
 						animations[i].name = System.IO.Path.GetFileNameWithoutExtension(modelImporter.assetPath) + "_" + i.ToString();
+						if (importSetting.isAnimationMakeLoop)
+						{
+							animations[i].loop = true;
+							animations[i].loopTime = true;
+						}
 					}
 				}
 				else
 				{
 					animations[0].name = System.IO.Path.GetFileNameWithoutExtension(modelImporter.assetPath);
+					if (importSetting.isAnimationMakeLoop)
+					{
+						animations[0].loop = true;
+						animations[0].loopTime = true;
+					}
 				}
 
 				modelImporter.clipAnimations = animations;
