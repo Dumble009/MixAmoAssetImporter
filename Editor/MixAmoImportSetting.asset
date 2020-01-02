@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940a5ad57e4d02d4faa9d2c86074bda6, type: 3}
   m_Name: MixAmoImportSetting
   m_EditorClassIdentifier: 
-  avatar: {fileID: 0}
-  mixAmoDirectory: 
+  avatar: {fileID: 9000000, guid: c7e28fd154d0eff4386654ca087d1435, type: 3}
+  mixAmoDirectory: Mixamo

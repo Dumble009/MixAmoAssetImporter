@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
 public class MixAmoAssetImporter : AssetPostprocessor
 {
+
 	void OnPreprocessModel()
 	{
 		var modelImporter = assetImporter as ModelImporter;
-		
+		var asset = AssetDatabase.LoadAssetAtPath<Object>(assetImporter.assetPath);
+		Debug.Log(asset == null);
+		if (asset != null)
+		{
+			return;
+		}
 		MixAmoImportSetting importSetting = GetMixAmoImportSetting();
 		if (importSetting != null)
 		{
@@ -22,13 +29,21 @@ public class MixAmoAssetImporter : AssetPostprocessor
 				modelImporter.materialLocation = ModelImporterMaterialLocation.External;
 			}
 		}
+
+		AssetDatabase.ImportAsset(modelImporter.assetPath);
 	}
 
 	void OnPreprocessAnimation()
 	{
 		var modelImporter = assetImporter as ModelImporter;
+		
 		MixAmoImportSetting importSetting = GetMixAmoImportSetting();
-
+		var asset = AssetDatabase.LoadAssetAtPath<Object>(assetImporter.assetPath);
+		Debug.Log(asset == null);
+		if (asset != null)
+		{
+			return;
+		}
 		if (importSetting != null && IsAssetContainedInMixAmoDir(assetImporter.assetPath, importSetting))
 		{
 			var animations = modelImporter.defaultClipAnimations;
@@ -57,6 +72,37 @@ public class MixAmoAssetImporter : AssetPostprocessor
 			{
 				modelImporter.sourceAvatar = avatar;
 			}
+
+			/*var clips = AssetDatabase
+							.LoadAllAssetRepresentationsAtPath(modelImporter.assetPath)
+							.OfType<AnimationClip>()
+							.ToArray<AnimationClip>();
+
+			foreach (var oldClip in clips)
+			{
+				var newClip = new AnimationClip();
+				AnimationUtility.SetAnimationEvents(newClip, AnimationUtility.GetAnimationEvents(oldClip));
+				AnimationUtility.SetAnimationClipSettings(newClip, AnimationUtility.GetAnimationClipSettings(oldClip));
+
+				
+				foreach (var curveBinding in AnimationUtility.GetCurveBindings(oldClip))
+				{
+					AnimationCurve curve = AnimationUtility.GetEditorCurve(oldClip, curveBinding);
+					newClip.SetCurve(curveBinding.path, curveBinding.type, curveBinding.propertyName, curve);
+				}
+
+				foreach (var curveBinding in AnimationUtility.GetObjectReferenceCurveBindings(oldClip))
+				{
+					AnimationCurve curve = AnimationUtility.GetEditorCurve(oldClip, curveBinding);
+					newClip.SetCurve(curveBinding.path, curveBinding.type, curveBinding.propertyName, curve);
+				}
+
+				var path = System.IO.Path.GetDirectoryName(modelImporter.assetPath) + "/" + oldClip.name + ".anim";
+				path = path.Replace("\\", "/");
+				AssetDatabase.CreateAsset(newClip, path);
+			}*/
+			//AssetDatabase.Refresh();
+			
 		}
 	}
 
