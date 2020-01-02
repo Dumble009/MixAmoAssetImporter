@@ -11,7 +11,6 @@ public class MixAmoAssetImporter : AssetPostprocessor
 	{
 		var modelImporter = assetImporter as ModelImporter;
 		var asset = AssetDatabase.LoadAssetAtPath<Object>(assetImporter.assetPath);
-		Debug.Log(asset == null);
 		if (asset != null)
 		{
 			return;
@@ -39,7 +38,6 @@ public class MixAmoAssetImporter : AssetPostprocessor
 		
 		MixAmoImportSetting importSetting = GetMixAmoImportSetting();
 		var asset = AssetDatabase.LoadAssetAtPath<Object>(assetImporter.assetPath);
-		Debug.Log(asset == null);
 		if (asset != null)
 		{
 			return;
