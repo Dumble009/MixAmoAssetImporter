@@ -9,6 +9,7 @@ You must configure MixAmoImportSetting.asset in MixAmoAssetImporter/Editor.
 1. Set a humanoid avatar in Avatar property.
 2. Set a path where you want to import assets from MixAmo in MixAmoDirectory property.<br>
    (if you want to import to "(projectpath)/Assets/ExternalAssets/MixAmo", set a path "ExternalAssets/MixAmo")
+![img](https://i.imgur.com/HC5cak1.png)
 
 <br>
 If you happened to delete MixAmoImportSetting.asset, you can create alternative one,<br>
