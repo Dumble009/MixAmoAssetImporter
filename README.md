@@ -16,3 +16,7 @@ If you happened to delete MixAmoImportSetting.asset, you can create alternative 
 Right click on Project view → Create → MixAmoImportSetting
 <br><br>
 You can store MixAmoImportSetting.asset where you want, but you mustn't have more than two.
+
+Please make sure that fbx files of characters don't have any animations.
+When you download characters from Mixamo, don't forget to set "Pose" as "Original Pose(.fbx)".
+If you set "Pose" as "T-Pose", this asset postprocessor recognize that file as animation file, and change the avatar.
